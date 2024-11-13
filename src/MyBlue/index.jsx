@@ -1,11 +1,23 @@
 import * as S from "./style";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Swal from 'sweetalert2';
+import 'jquery-mask-plugin';
+import $ from 'jquery';
 
 import Logo from "../assets/MeuBlue.png";
 
+import Linkedin from "../assets/icon-awesome-linkedin.svg";
+import Tel from "../assets/icon-awesome-phone-square.svg";
+
 import { GoShieldCheck } from "react-icons/go";
 import { FaAngleDown } from "react-icons/fa6";
+
+import { IoShieldCheckmarkOutline,  IoPhonePortraitOutline } from "react-icons/io5";
+import { MdOutlineMessage } from "react-icons/md";
+import { IoMdCloudOutline } from "react-icons/io";
+import { TbTruckDelivery } from "react-icons/tb";
+import { RiWifiOffLine } from "react-icons/ri";
 
 import I1 from "../assets/icon-estoque-meu-sige.svg";
 import I2 from "../assets/icon-financas-meu-sige.svg";
@@ -25,13 +37,96 @@ import t10 from "../assets/relatorios.svg";
 import t11 from "../assets/gestao-de-servicos.svg";
 import t12 from "../assets/emissao-de-notas.svg";
 
-import Back from "../assets/o-software-da-sua-empresa.png";
+import b1 from "../assets/erp-para-comercio.png";
+import b2 from "../assets/erp-para-distribuicao.png";
+import b3 from "../assets/erp-para-industria.png";
+import b4 from "../assets/erp-para-produtos-alimenticios.png";
+import b5 from "../assets/erp-para-produtos-medicos.png";
+import b6 from "../assets/erp-para-servico.png";
 
 import Hexagon from "../assets/ecossistema-de-gestao-exagono.svg";
+import Woman from "../assets/agendar-apresentacao-meu-sige.png";
+import Back from "../assets/o-software-da-sua-empresa.png";
 import Hand from "../assets/hand.png";
 
 export function MyBlue(){
+    const [disabled, setDisabled] = useState(false);
     const [position, setPosition] = useState('');
+    
+    const [type, setType] = useState('Industria');
+    const [telefone, setTelefone] = useState('');
+    const [name2, setName2] = useState('');
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [cnpj, setCnpj] = useState('');
+ 
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+
+
+    useEffect(() => {
+      $('#cnpj').mask('00.000.000/0000-00');
+      $('#telefone').mask('(00) 00000-0000');
+    }, []);
+
+    async function HandleSend(){
+     if (!telefone.trim() || !name2.trim() || !name.trim() || !email.trim() || !type.trim() || !cnpj.trim()) {
+      return Toast.fire({
+              icon: "warning",
+              title: "Preencha todos os campos!"
+             });
+     }
+
+     const regexEmail = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+     const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
+     const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
+
+     if (!regexEmail.test(email)) {
+      return Toast.fire({
+        icon: "warning",
+        title: "Digite um email válido"
+       });
+     };
+
+     if (!cnpjRegex.test(cnpj)) {
+      return Toast.fire({
+        icon: "warning",
+        title: "Digite um cnpj válido"
+       });
+     };
+
+     if (!telefoneRegex.test(telefone)) {
+      return Toast.fire({
+        icon: "warning",
+        title: "Digite um número de telefone válido"
+       });
+     };
+
+
+     try {
+      setDisabled(true)
+      console.log(telefone, email, name, name2, type, cnpj);
+
+      Toast.fire({
+       icon: "success",
+       title: "Agendamento feito!"
+      });
+
+     } catch(error) {
+      setDisabled(false)
+     } finally {
+      setDisabled(false)
+     }
+    }
 
     return(
      <S.Container>
@@ -364,9 +459,189 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
         </div>
 
         <div className="right">
+         <ul>
+<li>
+<GoShieldCheck/>
+<p>
+  <strong>Entenderemos os processos </strong> da sua empresa;
+</p>
+</li>
 
+<li>
+<GoShieldCheck/>
+<p>
+  Apresentaremos as funcionalidades nativas do ERP;
+</p>
+</li>
+
+<li>
+<GoShieldCheck/>
+<p>
+  Pensaremos juntos as possíveis <strong> customizações.</strong>
+</p>
+</li>
+
+         </ul>
+         <img src={Woman} alt=""/>
         </div>
       </S.Ads>
+
+      <S.Branches>
+        <h3>o Meu Blue é perfeito para os seguintes <strong> ramos de atuação</strong></h3>
+
+        <div className="images">
+          <div className="image">
+            <img src={b1} alt="" />
+            <span>Comércio</span>
+          </div>
+
+          <div className="image">
+            <img src={b2} alt="" />
+            <span>Distribuidoras</span>
+          </div>
+
+          <div className="image">
+            <img src={b3} alt="" />
+            <span>Indústria</span>
+          </div>
+
+          <div className="image">
+            <img src={b4} alt="" />
+            <span>Produtos Alimentícios</span>
+          </div>
+
+          <div className="image">
+            <img src={b5} alt="" />
+            <span>Produtos Médicos</span>
+          </div>
+
+          <div className="image">
+            <img src={b6} alt="" />
+            <span>Serviços</span>
+          </div>
+
+        </div>
+      </S.Branches>
+
+      <S.Form>
+       <div className="form">
+        <h3>
+         <strong>Preencha os dados </strong> abaixo e
+         <strong> agende </strong> <br /> uma apresentação comercial!
+        </h3>
+
+        <div className="inputs">
+          <input 
+           type="text" 
+           name="name" 
+           value={name}
+           placeholder="Nome*" 
+           onChange={(e)=> setName(e.target.value)}
+           onInput={(e)=> setName(e.target.value)}/>
+
+          <input 
+           type="text" 
+           id="telefone" 
+           name="telefone" 
+           value={telefone}
+           placeholder="Telefone*" 
+           onChange={(e)=> setTelefone(e.target.value)}
+           onInput={(e)=> setTelefone(e.target.value)}/>
+
+          <input 
+           type="email" 
+           name="email" 
+           value={email}
+           placeholder="Email corporativo*" 
+           onChange={(e)=> setEmail(e.target.value)}
+           onInput={(e)=> setEmail(e.target.value)}/>
+
+          <input 
+           type="text" 
+           name="name2" 
+           value={name2}
+           placeholder="Nome da empresa*" 
+           onChange={(e)=> setName2(e.target.value)}
+           onInput={(e)=> setName2(e.target.value)}/>
+
+          <input
+           id="cnpj"
+           type="text"
+           value={cnpj}
+           placeholder="CNPJ"
+           onChange={(e) => setCnpj(e.target.value)}
+           onInput={(e) => setCnpj(e.target.value)}
+          />
+
+          <select defaultValue={type} name="type" id="" onChange={(e)=> setType(e.target.value)}>
+            <option value="Industria">Industria</option>
+            <option value="Comércio">Comércio</option>
+            <option value="Prestação de Serviços">Prestação de Serviços</option>
+            <option value="Distribuição">Distribuição</option>
+            <option value="Produtos Médicos">Produtos Médicos</option>
+            <option value="Produtos Alimentícios">Produtos Alimentícios</option>
+          </select>
+        </div>
+
+        <button onClick={HandleSend} disabled={disabled}>{ disabled ? 'Agendando...' : 'Agendar'}</button>
+       </div>
+      </S.Form>
+
+      <S.Footer>
+        <div className="top">
+         <div className="icons">
+          <div className="icon">
+           <img src={Tel} alt="" onClick={()=>  {
+            window.open("tel:+551121106090", '_blank');
+           }}/>
+           <a href="tel:+551121106090" target="blank">+55 11 2110-6090</a>
+          </div>
+
+          <div className="icon">
+           <img src={Linkedin} alt="" onClick={()=>  {
+             window.open("tel:+551121106090", '_blank');
+           }}/>
+          </div>
+         </div>
+
+         <div className="eco">
+         <div className="ecosystem">
+          <div className="cloud circle">
+           <IoMdCloudOutline />
+          </div>
+
+          <div className="truck circle" >
+           <TbTruckDelivery />
+          </div>
+
+          <div className="check circle">
+           <IoShieldCheckmarkOutline />
+          </div>
+
+          <div className="phone circle" >
+           <IoPhonePortraitOutline />
+          </div>
+
+          <div className="nowifi circle">
+           <RiWifiOffLine />
+          </div>
+
+          <div className="message circle">
+           <MdOutlineMessage />
+          </div>
+         </div>
+
+         <span>
+         <strong>Ecossistema </strong> de <br />
+         gestão e vendas
+         </span>
+         </div>
+        </div>
+
+        <p>
+        Todos os direitos reservados | <strong> Blue Erp - 2024</strong>
+        </p>
+      </S.Footer>
      </S.Container>
     )
 }

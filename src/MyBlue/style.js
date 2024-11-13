@@ -707,7 +707,7 @@ button {
 `
 
 export const Ads = styled.div`
-height: 60vh;
+height: 55vh;
 width: 100%;
 
 background-color: #00008a; 
@@ -716,7 +716,7 @@ padding: 0 0 0 6rem;
 justify-content: space-between;
 align-items: center;
 display: flex;
-gap: 15rem;
+gap: 10rem;
 
 .text {
 flex-direction: column;
@@ -784,5 +784,313 @@ button {
  flex: 1;
 
  background-color: #8f00fc;
+ padding: 0 0 0 6rem;
+
+ align-items: center;
+ position: relative;
+ display: flex;
+
+ &::after {
+ content: " ";
+ position: absolute;
+ z-index: 1;
+ left: 0;
+ top: 0;
+
+ height: 100%;
+ width: 100%;
+
+ background-image: url(${Back});
+ background-size: cover;
+ opacity: .1;
+
+}
+
+ img {
+  position: absolute;
+  right: 6rem;
+  bottom: 0;
+
+  height: 90%;
+  z-index: 2;
+ }
+
+ ul {
+  z-index: 3;
+  li {
+    list-style: none;
+    z-index: 2;
+
+    padding: .5rem 0;
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+
+    svg {
+      height: 1.5rem;
+      width: 1.5rem;
+
+      color: #0000c6;
+      flex-shrink: 0;
+    }
+ 
+    p {
+      font-size: 1.5rem;
+      color: #0000c6;
+    }
+  }
+ }
+}
+`
+
+export const Branches = styled.div`
+height: 60vh;
+width: 100%;
+
+background-color: #FFFFFF;
+padding: 6rem;
+
+justify-content: center;
+flex-direction: column;
+align-items: center;
+display: flex;
+gap: 5rem;
+
+h3 {
+ font-size: 2.7rem;
+ font-weight: 400;
+ color: #5800cc;
+}
+
+.images {
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+
+  .image {
+   flex-direction: column;
+   align-items: center;
+   display: flex; 
+   gap: 1rem;
+
+   img {
+    height: 19rem;
+    width: 19rem;
+
+    border-radius: 2rem 0 2rem 0;
+
+    &:hover {
+     border-radius: 0 2rem 0 2rem;
+    }
+   }
+   span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #5800cc;
+
+    text-align: center;
+   }
+  }
+}
+`
+
+export const Form = styled.div`
+height: 100vh;
+width: 100%;
+
+background-color: #8f00fc;
+position: relative;
+
+justify-content: center;
+align-items: center;
+display: flex;
+
+&::after {
+ content: " ";
+ position: absolute;
+ z-index: 1;
+ left: 0;
+ top: 0;
+
+ height: 100%;
+ width: 100%;
+
+ background-image: url(${Back});
+ background-size: cover;
+ opacity: .1;
+
+}
+
+.form {
+ height: 85%;
+ width: 70%;
+
+ z-index: 3;
+
+ background-color: #FFFFFF;
+ border-radius: .5rem;
+ padding: 4rem 6rem;
+
+ flex-direction: column;
+ align-items: center;
+ display: flex;
+ gap: 5rem;
+
+ h3 {
+  font-weight: 400;
+  font-size: 3rem;
+  color: #8f00fc;
+
+  text-align: center;
+ }
+
+ .inputs {
+  width: 100%;
+
+  grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  gap: 2rem;
+
+  input, select {
+   height: 5.6rem;
+   width: 100%;
+
+   border: 1px solid #5800cc;
+   outline: #8f00fc;
+   border-radius: .5rem;
+   padding: 1rem 2rem;
+  }
+ }
+
+ button {
+  height: 5.6rem;
+  width: 30rem;
+
+  background-color: #8f00fc;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #FFFFFF;
+
+  border-radius: .5rem;
+  border: none;
+
+  &:hover {
+    filter: brightness(110%);
+    cursor: pointer;
+  } 
+
+  &:disabled {
+    filter: brightness(80%);
+    cursor: auto;
+  }
+ }
+}
+`
+
+export const Footer = styled.footer`
+height: 15rem;
+width: 100%;
+
+justify-content: center;
+flex-direction: column;
+align-items: center;
+display: flex;
+gap: 4rem;
+
+padding: 0 20rem;
+
+.top {
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+
+  .icons {
+    align-items: center;
+    display: flex;
+    gap: 4rem;
+
+    .icon {
+     align-items: center;
+     display: flex;
+     gap: 1rem;
+
+     img {
+      cursor: pointer;
+     }
+
+     a {
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #8f00fc;
+
+      cursor: pointer;
+     }
+    }
+  }
+
+  .eco {
+    align-items: center;
+    display: flex;
+    gap: 4rem;
+
+   .ecosystem {
+   width: fit-content;
+   height: 3rem;
+   
+   background-color: #FFFFFF;
+   border-radius: 2.5rem;
+
+   
+   justify-content: space-between;
+   align-items: center;
+   display: flex;
+
+   .circle {
+    height: 4.5rem;
+    width: 4.5rem;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    svg {
+     font-size: 2.4rem;
+     color: #7300cc;
+    }
+
+
+   }
+   .cloud {
+    background-color: #7300cc;
+    
+    svg {
+      color: #FFFFFF;
+    }
+   }
+
+   }
+
+   span {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #8f00fc;
+   }
+  }
+}
+
+p {
+ font-size: 1.6rem;
+ font-weight: 400;
+ color: #6d6d6d;
 }
 `
