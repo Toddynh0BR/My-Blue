@@ -1,6 +1,7 @@
 import * as S from "./style";
 
 import { useState, useEffect } from "react";
+import InputMask from 'react-input-mask';
 import Swal from 'sweetalert2';
 import 'jquery-mask-plugin';
 import $ from 'jquery';
@@ -78,55 +79,56 @@ export function MyBlue(){
       $('#telefone').mask('(00) 00000-0000');
     }, []);
 
-    async function HandleSend(){
-     if (!telefone.trim() || !name2.trim() || !name.trim() || !email.trim() || !type.trim() || !cnpj.trim()) {
-      return Toast.fire({
-              icon: "warning",
-              title: "Preencha todos os campos!"
-             });
-     }
-
-     const regexEmail = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
-     const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
-     const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
-
-     if (!regexEmail.test(email)) {
-      return Toast.fire({
-        icon: "warning",
-        title: "Digite um email válido"
-       });
-     };
-
-     if (!cnpjRegex.test(cnpj)) {
-      return Toast.fire({
-        icon: "warning",
-        title: "Digite um cnpj válido"
-       });
-     };
-
-     if (!telefoneRegex.test(telefone)) {
-      return Toast.fire({
-        icon: "warning",
-        title: "Digite um número de telefone válido"
-       });
-     };
-
-
-     try {
-      setDisabled(true)
-      console.log(telefone, email, name, name2, type, cnpj);
-
-      Toast.fire({
-       icon: "success",
-       title: "Agendamento feito!"
-      });
-
-     } catch(error) {
-      setDisabled(false)
-     } finally {
-      setDisabled(false)
-     }
-    }
+    async function HandleSend() {
+      if (!telefone.trim() || !name2.trim() || !name.trim() || !email.trim() || !type.trim() || !cnpj.trim()) {
+        return Toast.fire({
+          icon: "warning",
+          title: "Preencha todos os campos!"
+        });
+      }
+    
+      const regexEmail = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+      const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
+      const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
+    
+      if (!regexEmail.test(email)) {
+        return Toast.fire({
+          icon: "warning",
+          title: "Digite um email válido"
+        });
+      }
+    
+      if (!cnpjRegex.test(cnpj)) {
+        return Toast.fire({
+          icon: "warning",
+          title: "Digite um cnpj válido"
+        });
+      }
+    
+      if (!telefoneRegex.test(telefone)) {
+        return Toast.fire({
+          icon: "warning",
+          title: "Digite um número de telefone válido"
+        });
+      }
+    
+      try {
+        setDisabled(true);
+        console.log(telefone, email, name, name2, type, cnpj);
+    
+        Toast.fire({
+          icon: "success",
+          title: "Agendamento feito!"
+        });
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "Ocorreu um erro, tente novamente!"
+        });
+      } finally {
+        setDisabled(false);
+      }
+    };
 
     return(
      <S.Container>
@@ -539,14 +541,12 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
            onChange={(e)=> setName(e.target.value)}
            onInput={(e)=> setName(e.target.value)}/>
 
-          <input 
-           type="text" 
-           id="telefone" 
-           name="telefone" 
-           value={telefone}
+          <InputMask 
+           value={telefone} 
+           mask="(99) 99999-9999" 
            placeholder="Telefone*" 
-           onChange={(e)=> setTelefone(e.target.value)}
-           onInput={(e)=> setTelefone(e.target.value)}/>
+           onInput={(e)=> setTelefone(e.target.value)}
+           onChange={e => setTelefone(e.target.value)} />
 
           <input 
            type="email" 
@@ -564,14 +564,14 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
            onChange={(e)=> setName2(e.target.value)}
            onInput={(e)=> setName2(e.target.value)}/>
 
-          <input
-           id="cnpj"
-           type="text"
-           value={cnpj}
+          <InputMask 
+           value={cnpj} 
            placeholder="CNPJ"
-           onChange={(e) => setCnpj(e.target.value)}
+           mask="99.999.999/9999-99" 
+           onChange={e => setCnpj(e.target.value)}
            onInput={(e) => setCnpj(e.target.value)}
-          />
+           />
+
 
           <select defaultValue={type} name="type" id="" onChange={(e)=> setType(e.target.value)}>
             <option value="Industria">Industria</option>
