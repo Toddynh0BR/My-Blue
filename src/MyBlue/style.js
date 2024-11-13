@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import Back from "../assets/pattern-meu-sige-passagem-80.png";
-import TopBack from "../assets/back-bellow-fold.svg";
+
 import Back2 from "../assets/background.png";
 import Man from "../assets/my-blue-man.png";
 
@@ -286,11 +286,6 @@ overflow: hidden;
 .Top {
  height: 50rem;
  width: 100%;
-
- background-image: url(${TopBack});
- background-repeat: no-repeat;
- background-position: top;
- background-size: cover;
  padding: 6rem;
 
  position: absolute;
@@ -301,10 +296,21 @@ overflow: hidden;
  display: flex;
  gap: 4rem;
 
+ .Background {
+  width: 105%;
+ 
+  position: absolute;
+  z-index: 3;
+  left: -.5rem;
+  top: 0;
+ }
+
  h3 {
   font-size: 2.5rem;
   font-weight: 400;
   color: #8f00fc;
+
+  z-index: 4;
  }
 
  .gestoes {
@@ -313,6 +319,7 @@ overflow: hidden;
   justify-content: space-between;
   align-items: center;
   display: flex;
+  z-index: 4;
   gap: 2rem;
 
   .gestao {
@@ -371,10 +378,10 @@ overflow: hidden;
 
 .Bottom {
   width: 100%;
-  height: 150vh;
+  height: 130vh;
 
-  padding: 0 6rem;
   position: absolute;
+  padding: 0rem 6rem 10rem;
   bottom: 0rem;
 
   justify-content: center;
@@ -473,7 +480,7 @@ position: relative;
 
 .Hand {
 position: absolute;
-bottom: -5rem;
+bottom: -15rem;
 }
 }
 }
@@ -830,13 +837,13 @@ button {
       height: 1.5rem;
       width: 1.5rem;
 
-      color: #0000c6;
+      color: #FFFFFF;
       flex-shrink: 0;
     }
  
     p {
       font-size: 1.5rem;
-      color: #0000c6;
+      color: #FFFFFF;
     }
   }
  }

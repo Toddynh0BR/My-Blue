@@ -1,6 +1,6 @@
 import * as S from "./style";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InputMask from 'react-input-mask';
 import Swal from 'sweetalert2';
 import 'jquery-mask-plugin';
@@ -10,6 +10,7 @@ import Logo from "../assets/MeuBlue.png";
 
 import Linkedin from "../assets/icon-awesome-linkedin.svg";
 import Tel from "../assets/icon-awesome-phone-square.svg";
+import TopBack from "../assets/back-bellow-fold.svg";
 
 import { GoShieldCheck } from "react-icons/go";
 import { FaAngleDown } from "react-icons/fa6";
@@ -53,6 +54,9 @@ import Hand from "../assets/hand.png";
 export function MyBlue(){
     const [disabled, setDisabled] = useState(false);
     const [position, setPosition] = useState('');
+    const section1Ref = useRef(null);
+    const section2Ref = useRef(null);
+    const section3Ref = useRef(null);
     
     const [type, setType] = useState('Industria');
     const [telefone, setTelefone] = useState('');
@@ -73,6 +77,12 @@ export function MyBlue(){
       }
     });
 
+    const handleScrollToSection = (sectionRef) => {
+      sectionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    };
 
     useEffect(() => {
       $('#cnpj').mask('00.000.000/0000-00');
@@ -135,17 +145,17 @@ export function MyBlue(){
       <S.Header>
        <div className="top">
         <span>
-            Um produto da <strong>BLUE ERP</strong>
+            Um produto da <strong>Blue Innovation Group</strong>
         </span>
        </div>
 
        <img src={Logo} alt="" />
 
        <div className="right">
-        <span><strong>Ecossistema </strong> de Gestão <FaAngleDown/></span>
-        <span>ERP sob medida <FaAngleDown/></span>
+        <span onClick={() => handleScrollToSection(section1Ref)}><strong>Ecossistema </strong> de Gestão <FaAngleDown/></span>
+        <span onClick={() => handleScrollToSection(section2Ref)}>ERP sob medida <FaAngleDown/></span>
 
-        <button>Agendar apresentação</button>
+        <button onClick={() => handleScrollToSection(section3Ref)}>Agendar apresentação</button>
        </div>
       </S.Header>
 
@@ -159,7 +169,7 @@ Com o <strong> Meu Blue </strong>, você  <br /> tem  mais do que um sistema de 
 Tenha um <strong> software exclusivo, </strong> desenvolvido <br /> para atender às necessidades específicas do <br /> <strong> seu negócio!</strong>
          </span>
 
-         <button>Agendar apresentação</button>
+         <button onClick={() => handleScrollToSection(section3Ref)}>Agendar apresentação</button>
         </div>
 
         <div className="image">
@@ -195,6 +205,7 @@ Com o <strong> Meu Blue </strong> você descobrirá todos os benefícios de um <
 
       <S.Plataform data-position={position}>
         <div className="Top">
+         <img src={TopBack} alt="" className="Background"/>
          <h3><strong>Gerencie cada setor do seu negócio </strong> em uma só plataforma.</h3>
 
          <div className="gestoes">
@@ -312,8 +323,8 @@ Com o <strong> Meu Blue </strong> você descobrirá todos os benefícios de um <
          </div>
         </div>
 
-        <div className="Bottom">
-         <div className="left">
+        <div className="Bottom" ref={section1Ref}>
+         <div className="left"  >
           <h2>
           Um ERP completo com <strong> aplicativos integrados </strong> para 
           aumentar a produtividade e unificar todos 
@@ -335,7 +346,7 @@ Com o <strong> Meu Blue </strong> você descobrirá todos os benefícios de um <
              onMouseEnter={()=> setPosition('lite')}
              onMouseLeave={()=> setPosition('')} 
             >
-              <strong>Loja</strong>
+              <strong>APP</strong>
               <p>Offline</p>
             </div>
 
@@ -358,7 +369,7 @@ Com o <strong> Meu Blue </strong> você descobrirá todos os benefícios de um <
         </div>
       </S.Plataform>
 
-      <S.Software>
+      <S.Software ref={section2Ref}>
        <div className="left">
         <h2>
          Oferecemos <strong> o melhor <br /> custo-benefício </strong> em software de gestão personalizado no mercado!
@@ -374,7 +385,7 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
           </p>
         </div>
 
-        <button>Agendar apresentação</button>
+        <button onClick={() => handleScrollToSection(section3Ref)}>Agendar apresentação</button>
        </div>
 
        <div className="right">
@@ -447,7 +458,7 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
           </div>
         </div>
 
-        <button>Agendar apresentação</button>
+        <button onClick={() => handleScrollToSection(section3Ref)}>Agendar apresentação</button>
       </S.Tools>
 
       <S.Ads>
@@ -457,7 +468,7 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
           <strong> apresentação sem <br />
           compromisso </strong>
           </h2>
-          <button>Agendar apresentação</button>
+          <button onClick={() => handleScrollToSection(section3Ref)}>Agendar apresentação</button>
         </div>
 
         <div className="right">
@@ -525,7 +536,7 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
         </div>
       </S.Branches>
 
-      <S.Form>
+      <S.Form ref={section3Ref}>
        <div className="form">
         <h3>
          <strong>Preencha os dados </strong> abaixo e
@@ -592,14 +603,14 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
          <div className="icons">
           <div className="icon">
            <img src={Tel} alt="" onClick={()=>  {
-            window.open("tel:+551121106090", '_blank');
+            window.open("https://wa.me/message/KL5UXTDEMTXIK1", '_blank');
            }}/>
-           <a href="tel:+551121106090" target="blank">+55 11 2110-6090</a>
+           <a href="https://wa.me/message/KL5UXTDEMTXIK1" target="blank">+55 11 2110-6090</a>
           </div>
 
           <div className="icon">
            <img src={Linkedin} alt="" onClick={()=>  {
-             window.open("tel:+551121106090", '_blank');
+             window.open("https://www.linkedin.com/company/105473549/", '_blank');
            }}/>
           </div>
          </div>
@@ -639,7 +650,7 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
         </div>
 
         <p>
-        Todos os direitos reservados | <strong> Blue Erp - 2024</strong>
+        Todos os direitos reservados | <strong> Blue Innovation Group - 2024</strong>
         </p>
       </S.Footer>
      </S.Container>
