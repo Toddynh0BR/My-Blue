@@ -475,9 +475,11 @@ overflow: hidden;
         
         strong {
           font-size: 1.8rem;
+          user-select: none;
         }
         p {
           font-size: 1.4rem;
+          user-select: none;
         }
 
         &:hover {

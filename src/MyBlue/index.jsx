@@ -1,6 +1,8 @@
 import * as S from "./style";
 
 import { useState, useEffect, useRef } from "react";
+import { api } from "../services/api";
+
 import InputMask from 'react-input-mask';
 import Swal from 'sweetalert2';
 import 'jquery-mask-plugin';
@@ -124,17 +126,43 @@ export function MyBlue(){
     
       try {
         setDisabled(true);
-        console.log(telefone, email, name, name2, type, cnpj);
+        const dataAtual = new Date();
+       
+        api.post('/send', {
+          text: `
+    <p>Um novo agendamento foi realizado com os seguintes detalhes:</p>
+
+    <ul>
+      <li><strong>Nome:</strong> ${name}</li>
+      <li><strong>Empresa:</strong> ${name2}</li>
+      <li><strong>Email:</strong> ${email}</li>
+      <li><strong>Telefone:</strong> ${telefone}</li>
+      <li><strong>CNPJ:</strong> ${cnpj}</li>
+      <li><strong>Tipo de Empresa:</strong> ${type}</li>
+    </ul>
+
+    <p><strong>Data e Hora do Agendamento:</strong> 
+    ${dataAtual.getDate()}/${dataAtual.getMonth() + 1}/${dataAtual.getFullYear()} às 
+    ${dataAtual.getHours()}:${dataAtual.getMinutes().toString().padStart(2, '0')}:${dataAtual.getSeconds().toString().padStart(2, '0')}</p>
+          `
+        });
     
         Toast.fire({
           icon: "success",
           title: "Agendamento feito!"
         });
       } catch (error) {
-        Toast.fire({
-          icon: "error",
-          title: "Ocorreu um erro, tente novamente!"
-        });
+        if (error.data) {
+          Toast.fire({
+            icon: "error",
+            title: error.data.message
+          });
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: "Ocorreu um erro, tente novamente!"
+          });
+        }
       } finally {
         setDisabled(false);
       }
