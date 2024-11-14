@@ -162,11 +162,11 @@ export function MyBlue(){
       <S.Main>
         <div className="texts">
          <h2>
-Com o <strong> Meu Blue </strong>, você  <br /> tem  mais do que um sistema de <br /> gestão como qualquer outro.
+Com o <strong> Meu Blue </strong>, você  <br className="br"/> tem  mais do que um sistema de <br  className="br"/> gestão como qualquer outro.
          </h2>
 
          <span>    
-Tenha um <strong> software exclusivo, </strong> desenvolvido <br /> para atender às necessidades específicas do <br /> <strong> seu negócio!</strong>
+Tenha um <strong> software exclusivo, </strong> desenvolvido <br /> para atender às necessidades específicas do <br  className="br"/> <strong> seu negócio!</strong>
          </span>
 
          <button onClick={() => handleScrollToSection(section3Ref)}>Agendar apresentação</button>
@@ -372,7 +372,7 @@ Com o <strong> Meu Blue </strong> você descobrirá todos os benefícios de um <
       <S.Software ref={section2Ref}>
        <div className="left">
         <h2>
-         Oferecemos <strong> o melhor <br /> custo-benefício </strong> em software de gestão personalizado no mercado!
+         Oferecemos <strong> o melhor <br className="br"/> custo-benefício </strong> em software de gestão personalizado no mercado!
         </h2>
 
         <div className="texts">
@@ -464,8 +464,8 @@ O desenvolvimento é realizado por especialistas da BLUE, que possuem total conh
       <S.Ads>
         <div className="text">
           <h2>
-          Agende agora mesmo uma <br />
-          <strong> apresentação sem <br />
+          Agende agora mesmo uma <br className="br"/>
+          <strong> apresentação sem <br className="br"/>
           compromisso </strong>
           </h2>
           <button onClick={() => handleScrollToSection(section3Ref)}>Agendar apresentação</button>
